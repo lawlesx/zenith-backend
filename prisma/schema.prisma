@@ -11,6 +11,30 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  name String
+  id       String @id @default(uuid())
+  username String @unique
+  gender   Gender
+  weight   Float?
+  height   Float?
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+model Meals {
+  id        String   @id @default(uuid())
+  username  String
+  meal_name String
+  nutrients Json?
+  meal_type MeatType
+  date      DateTime @default(now())
+}
+
+enum MeatType {
+  BREAKFAST
+  LUNCH
+  DINNER
+  DESSERT
 }
