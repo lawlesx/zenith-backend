@@ -1,8 +1,7 @@
 import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { getRecipe } from './src/controllers/recipe';
-import { createUser } from './src/controllers/user';
+import { createUser, getUser } from './src/controllers/user';
 
 dotenv.config();
 
@@ -19,10 +18,12 @@ app.get('/', async (req: Request, res: Response) => {
 
 app.post('/createUser', createUser)
 
-app.get('/recipe', async (req: Request, res: Response) => {
-  const recipe = await getRecipe();
-  res.send(recipe);
-}); 
+app.get('/getUser', getUser)
+
+// app.get('/recipe', async (req: Request, res: Response) => {
+//   const recipe = await getRecipe();
+//   res.send(recipe);
+// }); 
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);

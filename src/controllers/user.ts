@@ -28,14 +28,21 @@ export const createUser = async (req: Request, res: Response) => {
     return
   }
 
-  const {username,gender,weight,height} = req.body as User 
+  // const {username,gender,weight,height} = req.body as User 
 
   const user = await prisma.user.create({
-    data: {
-      username,
-      gender,
-      weight: Number(weight),
-      height: Number(height)
+    data: req.body
+  })
+
+  res.send(user);
+}
+
+export const getUser = async (req: Request, res: Response) => {
+  const { username } = req.params;
+
+  const user = await prisma.user.findFirst({
+    where: {
+      username
     }
   })
 
